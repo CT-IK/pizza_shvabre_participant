@@ -1,0 +1,4 @@
+.env
+venv
+delete_dp.py
+__pycache__

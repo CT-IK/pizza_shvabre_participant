@@ -132,8 +132,8 @@ async def quote_cmd(message: types.Message):
 
         await message.reply(
             f'💾 Цитата сохранена!\n\n'
-            f"«{quote}»\n"
-            f"— @{user}"
+            f"«{quote}»\n\n"
+            f"Автор: @{user}"
         )
 
 @common_router.message(Command('кто', prefix="!"))
@@ -161,8 +161,8 @@ async def complement_cmd(message: types.Message):
     if not user:
         await message.reply(
             "❗ Используй:\n"
-            "/комплимент ответом на сообщение\n"
-            "/комплимент @username"
+            "!комплимент ответом на сообщение\n"
+            "!комплимент @username"
         )
     else:
         complement = random.choice(complements)
@@ -170,7 +170,7 @@ async def complement_cmd(message: types.Message):
 
 @common_router.message(Command('совместимость', prefix="!"))
 async def compatibility_cmd(message: types.Message):
-    event = message.text.replace('/совместимость', '', 1).strip()
+    event = message.text.replace('!совместимость', '', 1).strip()
     compatibility = random.randint(0, 100)
     if not event:
         await message.reply('Напишите событие')
@@ -214,7 +214,7 @@ async def action_cmd(message: types.Message):
     if to_user == None:
         await message.reply(
             'Введите в формате\n'
-            '/[действие] @username'
+            '![действие] @username'
         )
     else:
         text = random.choice(ACTIONS[command]).format(

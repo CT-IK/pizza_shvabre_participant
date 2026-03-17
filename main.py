@@ -8,7 +8,6 @@ load_dotenv(find_dotenv())
 
 from handlers.private_cmd import private_router
 from handlers.group_cmd import group_router
-from handlers.auto_cmd import auto_router
 from handlers.common import common_router
 
 ALLOWED_UPDATES = ['message']
@@ -18,7 +17,6 @@ dp = Dispatcher()
 
 dp.include_router(private_router)
 dp.include_router(group_router)
-dp.include_router(auto_router)
 dp.include_router(common_router)
 
 

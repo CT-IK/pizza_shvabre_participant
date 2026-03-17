@@ -1,0 +1,9 @@
+services:
+  telegram-bot:
+    build: .
+    container_name: pizda_svabra_partcipant
+    environment:
+      - TOKEN=${TOKEN}
+    volumes:
+      - .:/app
+    restart: unless-stopped

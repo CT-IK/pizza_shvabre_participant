@@ -2,3 +2,5 @@
 venv
 delete_dp.py
 __pycache__
+active_games.json
+database.sqlite

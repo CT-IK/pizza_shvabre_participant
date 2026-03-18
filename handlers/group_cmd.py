@@ -66,10 +66,6 @@ async def whois_cmd(message: types.Message):
         "author": username
     })
 
-from datetime import datetime, timedelta
-
-from datetime import datetime, timedelta
-
 @group_router.message(F.text == '!до проекта')
 async def time_to_project(message: types.Message):
     project_start = datetime(year=2026, month=3, day=20, hour=9, minute=0)

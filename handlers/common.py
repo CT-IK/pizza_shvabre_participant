@@ -201,30 +201,36 @@ async def roulette_cmd(message: types.Message, bot: Bot):
         )
 
 
-# интерактивные команды
 @common_router.message()
 async def action_cmd(message: types.Message):
+    # сохраняем пользователя
+    user = message.from_user
+    if user.username:
+        save_user(user.id, user.username)
+
+    # проверяем что это команда
     if not message.text or not message.text.startswith('!'):
         return
-    command = message.text.split()[0][1:]
+
+    command = message.text.split()[0][1:].lower().strip()
+
     if command not in ACTIONS:
         return
+
+    # ищем пользователя
     to_user = find_user(message)
-    from_user = message.from_user.username
-    if to_user == None:
+    from_user = message.from_user.username or message.from_user.first_name
+
+    if not to_user:
         await message.reply(
             'Введите в формате\n'
             '![действие] @username'
         )
-    else:
-        text = random.choice(ACTIONS[command]).format(
-            from_user=from_user,
-            to_user=to_user
-        )
-        await message.reply(text)
+        return
 
-@common_router.message()
-async def save_users(message: types.Message):
-    user = message.from_user
-    if user.username:
-        save_user(user.id, user.username)
+    text = random.choice(ACTIONS[command]).format(
+        from_user=from_user,
+        to_user=to_user
+    )
+
+    await message.reply(text)
